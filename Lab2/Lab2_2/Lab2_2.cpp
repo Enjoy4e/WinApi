@@ -107,7 +107,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		MessageBox(hWnd, _TEXT("Получено сообщение от окна № 1 на выключение"), _TEXT("Приняли"), MB_OK);
 		SendMessage(HWND(wParam), WM_USER + 3, NULL, NULL);
-		//ExitWindowsEx(EWX_SHUTDOWN | EWX_FORCE, 0);
 		MySystemShutdown();
 	}
 	case WM_DESTROY:

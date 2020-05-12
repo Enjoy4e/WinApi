@@ -1,7 +1,10 @@
 #include <Windows.h>
 #include <tchar.h>
 
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK WndProc(HWND hWnd, // дескриптор окошка
+						 UINT , // сообщение, посылаемое ОС
+						 WPARAM	, // параметры
+						 LPARAM ); // сообщений, для последующего обращения
 
 TCHAR WinName[] = _T("Lab1");
 
@@ -10,9 +13,9 @@ int WINAPI _tWinMain(HINSTANCE This,		 // Дескриптор текущего приложения
 	LPTSTR cmd, 		// Командная строка 
 	int mode) 		// Режим отображения окна
 {
-	HWND hWnd;		// Дескриптор главного окна программы 
+	HWND hWnd;		// Дескриптор главного окна программы, где хранится информация о нашем окне, указатель на определенную область памяти в ядре
 	MSG msg; 		// Структура для хранения сообщения 
-	WNDCLASS wc; 	// Класс окна
+	WNDCLASS wc; 	// струкутра отвечает за характеристики окна
 	wc.hInstance = This;
 	wc.lpszClassName = WinName; 				// Имя класса окна 
 	wc.lpfnWndProc = WndProc; 					// Функция окна 
@@ -55,17 +58,23 @@ int WINAPI _tWinMain(HINSTANCE This,		 // Дескриптор текущего приложения
 bool Left = false, Right = false;
 int times_cl_l = 0, times_cl_r = 0;
 int x_koord = 0, y_koord = 0;
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWnd,//Дескриптор окна
+	UINT message,//Код сообщения
+	WPARAM wParam,//Указатели, где хранится информация для сообщения
+	LPARAM lParam)//Указатели, где хранится информация для сообщения
 {
 	switch (message)		 // Обработчик сообщений
 	{
 	case WM_PAINT:
 	{
-		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hWnd, &ps);
+		PAINTSTRUCT ps;// содержит информации для приложения. Эта информация может быть использована для окраски клиентской области окна, которым владеет приложение.
+		HDC hdc = BeginPaint(hWnd, &ps);//Определяет контекст устройства дисплея, используемый для рисования
 		if (Left == false && Right == false) {
+			//Функция извлекает дескриптор одного из предопределенных перьев, кистей, шрифтов или палитр.
 			SelectObject(hdc, GetStockObject(DC_PEN));
+			//Цвет пера
 			SetDCPenColor(hdc, RGB(38, 201, 255));
+			//создает логическую кисть, которая имеет заданный сплошной тон.
 			SelectObject(hdc, CreateSolidBrush(RGB(255, 251, 0)));
 			Ellipse(hdc, 300, 300, 500, 500);
 		}
@@ -96,8 +105,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_LBUTTONDOWN:
 	{
 		Left = true;
-		x_koord = LOWORD(lParam);
-		y_koord = HIWORD(lParam);
+		x_koord = LOWORD(lParam);//Ширина
+		y_koord = HIWORD(lParam);//Высота
 		if (times_cl_l != 10) {
 			++times_cl_l;
 		}
@@ -119,7 +128,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break; 			// Завершение программы 
 	default: 			// Обработка сообщения по умолчанию 
-		return DefWindowProc(hWnd, message, wParam, lParam);
+		return DefWindowProc(hWnd, message, wParam, lParam);//Если сообщение никак не обрабатывается
 	}
 
 	return 0;

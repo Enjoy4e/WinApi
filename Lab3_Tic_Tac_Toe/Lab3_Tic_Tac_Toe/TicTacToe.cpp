@@ -206,7 +206,7 @@ void CheckForGameOver()
 {
 	int nWinner;
 
-	//if the grid contains three consecutive X's or O's, declare a winner and start a new game
+	//Победа игрока или ничья
 	if (nWinner = IsWinner())
 	{
 		MessageBox(hwndMain, ((nWinner == EX) ? _T("Победил игрок №1!") : _T("Победил игрок №2!")),
@@ -260,7 +260,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
-		SetBkMode(hdc, TRANSPARENT);
+		SetBkMode(hdc, TRANSPARENT);//Режим фона
 		DrawBoard(hdc);
 
 		EndPaint(hwnd, &ps);
