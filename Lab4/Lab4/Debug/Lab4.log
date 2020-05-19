@@ -1,0 +1,6 @@
+﻿  Lab4.cpp
+C:\Users\enjoy\OneDrive\Рабочий стол\4 сем\Windows\WinApi\Test\Lab4\Lab4.cpp(119,19): warning C4101: dwTemp: неиспользованная локальная переменная
+C:\Users\enjoy\OneDrive\Рабочий стол\4 сем\Windows\WinApi\Test\Lab4\Lab4.cpp(119,8): warning C4101: dwCounter: неиспользованная локальная переменная
+C:\Users\enjoy\OneDrive\Рабочий стол\4 сем\Windows\WinApi\Test\Lab4\Lab4.cpp(166,15): warning C4101: ps: неиспользованная локальная переменная
+C:\Users\enjoy\OneDrive\Рабочий стол\4 сем\Windows\WinApi\Test\Lab4\Lab4.cpp(251,4): warning C4551: в вызове функции отсутствует список аргументов
+  Lab4.vcxproj -> C:\Users\enjoy\OneDrive\Рабочий стол\4 сем\Windows\WinApi\Test\Debug\Lab4.exe
